@@ -34,6 +34,13 @@ public class Sample001 extends JFrame implements ActionListener{
 	JTextField E_textX;
 	JTextField E_textY;
 
+	JRadioButton[] radio;
+	JTextField[][] textArr;
+
+	public String unselected[][];
+	public String selected_X;
+	public String selected_Y;
+
 
 	public static void main(String[] args) {
 		Sample001 frame = new Sample001();
@@ -46,7 +53,29 @@ public class Sample001 extends JFrame implements ActionListener{
 
 	Sample001() {
 
+		//ラジオボタン5つ作成
 		ButtonGroup group = new ButtonGroup();
+
+		radio = new JRadioButton[5];
+		radio[0] = new JRadioButton();
+		radio[1] = new JRadioButton();
+		radio[2] = new JRadioButton();
+		radio[3] = new JRadioButton();
+		radio[4] = new JRadioButton();
+
+		group.add(radio[0]);
+		group.add(radio[1]);
+		group.add(radio[2]);
+		group.add(radio[3]);
+		group.add(radio[4]);
+
+		//
+		textArr = new JTextField[5][2];
+
+		//
+
+
+
 
 
 		//入力を受け取るパネル
@@ -68,80 +97,70 @@ public class Sample001 extends JFrame implements ActionListener{
 		//各座標の値を入力するパネル
 		//AAAAAAAAAAAAA
 		JLabel lblA = new JLabel("座標A");
-		JRadioButton radio_A = new JRadioButton();
-		A_textX = new JTextField(10);
-		A_textY = new JTextField(10);
+		textArr[0][0] = new JTextField(10);
+		textArr[0][1] = new JTextField(10);
 
 		JPanel panel_A = new JPanel();
 		panel_A.setMaximumSize(new Dimension(Short.MAX_VALUE, 50));
 		//panel_A.setBackground(Color.orange);
-		group.add(radio_A);
-		panel_A.add(radio_A);
-		panel_A.add(radio_A);
+		panel_A.add(radio[0]);
 		panel_A.add(lblA);
-		panel_A.add(A_textX);
-		panel_A.add(A_textY);
+		panel_A.add(textArr[0][0]);
+		panel_A.add(textArr[0][1]);
 
 
 		//BBBBBBBBBB
 		JLabel lblB = new JLabel("座標B");
-		JRadioButton radio_B = new JRadioButton();
-		B_textX = new JTextField(10);
-		B_textY = new JTextField(10);
+		textArr[1][0] = new JTextField(10);
+		textArr[1][1] = new JTextField(10);
 
 		JPanel panel_B = new JPanel();
 		panel_B.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
 		//panel_B.setBackground(Color.YELLOW);
-		group.add(radio_B);
-		panel_B.add(radio_B);
+		panel_B.add(radio[1]);
 		panel_B.add(lblB);
-		panel_B.add(B_textX);
-		panel_B.add(B_textY);
+		panel_B.add(textArr[1][0]);
+		panel_B.add(textArr[1][1]);
 
 		//CCCCCCCCCCCCCCCCC
 		JLabel lblC = new JLabel("座標C");
-		JRadioButton radio_C = new JRadioButton();
-		C_textX = new JTextField(10);
-		C_textY = new JTextField(10);
+		textArr[2][0] = new JTextField(10);
+		textArr[2][1] = new JTextField(10);
+
 
 		JPanel panel_C = new JPanel();
 		panel_C.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
 		//panel_C.setBackground(Color.blue);
-		group.add(radio_C);
-		panel_C.add(radio_C);
+		panel_C.add(radio[2]);
 		panel_C.add(lblC);
-		panel_C.add(C_textX);
-		panel_C.add(C_textY);
+		panel_C.add(textArr[2][0]);
+		panel_C.add(textArr[2][1]);
 
 		//DDDDDDDDDDDDDDDDDDDD
 		JLabel lblD = new JLabel("座標D");
-		JRadioButton radio_D = new JRadioButton();
-		D_textX = new JTextField(10);
-		D_textY = new JTextField(10);
+		textArr[3][0] = new JTextField(10);
+		textArr[3][1] = new JTextField(10);
 
 		JPanel panel_D = new JPanel();
 		panel_D.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
 		//panel_D.setBackground(Color.gray);
-		group.add(radio_D);
-		panel_D.add(radio_D);
+		panel_D.add(radio[3]);
 		panel_D.add(lblD);
-		panel_D.add(D_textX);
-		panel_D.add(D_textY);
+		panel_D.add(textArr[3][0]);
+		panel_D.add(textArr[3][1]);
 
 		//EEEEEEEEEEEEEEEEEEEEEEEE
 		JLabel lblE = new JLabel("座標E");
-		JRadioButton radio_E = new JRadioButton();
-		E_textX = new JTextField(10);
-		E_textY = new JTextField(10);
+		textArr[4][0] = new JTextField(10);
+		textArr[4][1] = new JTextField(10);
 
 		JPanel panel_E = new JPanel();
 		panel_D.setMaximumSize(new Dimension(Short.MAX_VALUE, 20));
 		//panel_E.setBackground(Color.red);
-		group.add(radio_E);
-		panel_E.add(radio_E);
+		panel_E.add(radio[4]);
 		panel_E.add(lblE);
-		panel_E.add(E_textX);
-		panel_E.add(E_textY);
+		panel_E.add(textArr[4][0]);
+		panel_E.add(textArr[4][1]);
 
 
 		mainPanel.add(panelXY);
@@ -183,15 +202,34 @@ public class Sample001 extends JFrame implements ActionListener{
 
 
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
-
-
 	}
 
+
+	//計算ボタンがクリックされたとき
 	public void actionPerformed(ActionEvent e){
-		//System.out.println(D_textY.getText());
-		CalcDistance distance = new CalcDistance(A_textX.getText(), A_textY.getText());
+		unselected = new String[4][2];
+		int cnt = 0;
+		for (int i=0; i < radio.length ;i++) {
+			if (radio[i].isSelected()) {
+				selected_X = textArr[i][0].getText();
+				selected_Y = textArr[i][1].getText();
+			} else {
+				unselected[cnt][0] = textArr[i][0].getText();
+				unselected[cnt][1] = textArr[i][1].getText();
+				cnt++;
+			}
+		}
+		CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
+
+		//distance.permutation("012", "");
 		distance.printData();
 
 	}
+	/*
+		CalcDistance distance = new CalcDistance(A_textX.getText(), A_textY.getText(),
+												  B_textX.getText(), B_textY.getText());
+		distance.printData();
+	*/
+	}
 
-}
+//}
