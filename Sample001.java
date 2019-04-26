@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -21,6 +23,11 @@ import javax.swing.JTextField;
  * @author h_yamasaki
  *
  */
+
+class ReturnValues {
+	double resultdistance;
+	String resultRoute;
+}
 public class Sample001 extends JFrame implements ActionListener{
 
 	JTextField A_textX;
@@ -38,9 +45,9 @@ public class Sample001 extends JFrame implements ActionListener{
 	JTextField[][] textArr;
 
 	public String unselected[][];
+	public int selected_num;
 	public String selected_X;
 	public String selected_Y;
-
 
 	public static void main(String[] args) {
 		Sample001 frame = new Sample001();
@@ -197,9 +204,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		outputPanel.add(calcPanel);
 		outputPanel.add(resultPanel);
 
-
 		mainPanel.add(outputPanel);
-
 
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
@@ -211,6 +216,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		int cnt = 0;
 		for (int i=0; i < radio.length ;i++) {
 			if (radio[i].isSelected()) {
+				selected_num = i;
 				selected_X = textArr[i][0].getText();
 				selected_Y = textArr[i][1].getText();
 			} else {
@@ -219,17 +225,98 @@ public class Sample001 extends JFrame implements ActionListener{
 				cnt++;
 			}
 		}
+		System.out.println(selected_num);
 		CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
+		ReturnValues value = distance.start();
+		System.out.println(value.resultdistance);
+		System.out.println(value.resultRoute);
 
-		//distance.permutation("012", "");
-		distance.printData();
+
+		//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
+		//以下の処理かなり汚い。解決策求む
+		List<String> list_root = new ArrayList<>();
+		if (selected_num == 0) {
+			list_root.add("A");
+			for (int i=0; i < value.resultRoute.length() ;i++) {
+				System.out.println(value.resultRoute.substring(i,i+1));
+				if (value.resultRoute.substring(i,i+1).equals("0")) {
+					list_root.add("B");
+				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+					list_root.add("C");
+				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+					list_root.add("D");
+				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+					list_root.add("E");
+				}
+			}
+			list_root.add("A");
+		} else if (selected_num == 1) {
+			list_root.add("B");
+			for (int i=0; i < value.resultRoute.length() ;i++) {
+				System.out.println(value.resultRoute.substring(i,i+1));
+				if (value.resultRoute.substring(i,i+1).equals("0")) {
+					list_root.add("A");
+				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+					list_root.add("C");
+				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+					list_root.add("D");
+				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+					list_root.add("E");
+				}
+			}
+			list_root.add("B");
+		} else if (selected_num == 2) {
+			list_root.add("C");
+			for (int i=0; i < value.resultRoute.length() ;i++) {
+				System.out.println(value.resultRoute.substring(i,i+1));
+				if (value.resultRoute.substring(i,i+1).equals("0")) {
+					list_root.add("A");
+				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+					list_root.add("B");
+				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+					list_root.add("D");
+				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+					list_root.add("E");
+				}
+			}
+			list_root.add("C");
+		} else if (selected_num == 3) {
+			list_root.add("D");
+			for (int i=0; i < value.resultRoute.length() ;i++) {
+				System.out.println(value.resultRoute.substring(i,i+1));
+				if (value.resultRoute.substring(i,i+1).equals("0")) {
+					list_root.add("A");
+				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+					list_root.add("B");
+				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+					list_root.add("C");
+				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+					list_root.add("E");
+				}
+			}
+			list_root.add("D");
+		} else if (selected_num == 4) {
+			list_root.add("E");
+			for (int i=0; i < value.resultRoute.length() ;i++) {
+				System.out.println(value.resultRoute.substring(i,i+1));
+				if (value.resultRoute.substring(i,i+1).equals("0")) {
+					list_root.add("A");
+				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+					list_root.add("B");
+				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+					list_root.add("C");
+				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+					list_root.add("D");
+				}
+			}
+			list_root.add("E");
+		}
+
+
+		System.out.println(list_root);
+
+
 
 	}
-	/*
-		CalcDistance distance = new CalcDistance(A_textX.getText(), A_textY.getText(),
-												  B_textX.getText(), B_textY.getText());
-		distance.printData();
-	*/
-	}
+}
 
-//}
