@@ -119,11 +119,4 @@ public class CalcDistance {
 		}
 
 	}
-
-
-	/*
-	public void printData() {
-		System.out.println(this.add());
-	}
-	*/
 }
