@@ -80,10 +80,6 @@ public class Sample001 extends JFrame implements ActionListener{
 
 		textArr = new JTextField[5][2];
 
-
-
-
-
 		//入力を受け取るパネル
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
@@ -189,19 +185,25 @@ public class Sample001 extends JFrame implements ActionListener{
 		calcPanel.add(calcStart);
 
 		//結果出力パネル
-		JPanel resultPanel = new JPanel();
-		JLabel sentense = new JLabel("出力結果");
-		resultRoute = new JLabel();
-		resultDistance = new JLabel("最短移動距離");
-		resultRoute.setText("結果");
+		//最短経路出力パネル
+		JPanel routePanel = new JPanel();
+		JLabel sentenseRoute = new JLabel("最短経路 : ");
+		resultRoute = new JLabel("座標を入力してください");
 
-		resultPanel.add(sentense);
-		resultPanel.add(resultRoute);
-		resultPanel.add(resultDistance);
+		routePanel.add(sentenseRoute);
+		routePanel.add(resultRoute);
 
+		//最短経路の距離出力パネル
+		JPanel distancePanel = new JPanel();
+		JLabel sentenseDistance = new JLabel("最短距離 :");
+		resultDistance = new JLabel("○○");
+
+		distancePanel.add(sentenseDistance);
+		distancePanel.add(resultDistance);
 
 		outputPanel.add(calcPanel);
-		outputPanel.add(resultPanel);
+		outputPanel.add(routePanel);
+		outputPanel.add(distancePanel);
 
 		mainPanel.add(outputPanel);
 
@@ -227,9 +229,8 @@ public class Sample001 extends JFrame implements ActionListener{
 		System.out.println(selected_num);
 		CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
 		ReturnValues value = distance.start();
-		System.out.println(value.resultdistance);
-		System.out.println(String.format("%.2f", value.resultdistance));
-		System.out.println(value.resultRoute);
+		//System.out.println(value.resultdistance);
+		//System.out.println(value.resultRoute);
 
 
 
@@ -321,7 +322,6 @@ public class Sample001 extends JFrame implements ActionListener{
 		String point3 = list_root.get(3);
 		String point4 = list_root.get(4);
 
-		//String dist = String.valueOf(value.resultdistance);
 		resultRoute.setText(point0 + "→" + point1 + "→" + point2 + "→" + point3 + "→" + point4 + "→" + point0);
 		resultDistance.setText(String.format("%.2f", value.resultdistance));
 
