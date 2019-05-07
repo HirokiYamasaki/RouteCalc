@@ -43,6 +43,8 @@ public class Sample001 extends JFrame implements ActionListener{
 
 	JRadioButton[] radio;
 	JTextField[][] textArr;
+	JLabel resultRoute;
+	JLabel resultDistance;
 
 	public String unselected[][];
 	public int selected_num;
@@ -76,10 +78,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		group.add(radio[3]);
 		group.add(radio[4]);
 
-		//
 		textArr = new JTextField[5][2];
-
-		//
 
 
 
@@ -186,15 +185,15 @@ public class Sample001 extends JFrame implements ActionListener{
 		JButton calcStart = new JButton("計算");
 		calcStart.addActionListener(this);
 
-
 		calcStart.setPreferredSize(new Dimension(100, 30));
 		calcPanel.add(calcStart);
 
 		//結果出力パネル
 		JPanel resultPanel = new JPanel();
 		JLabel sentense = new JLabel("出力結果");
-		JLabel resultRoute = new JLabel("efece");
-		JLabel resultDistance = new JLabel("最短移動距離");
+		resultRoute = new JLabel();
+		resultDistance = new JLabel("最短移動距離");
+		resultRoute.setText("結果");
 
 		resultPanel.add(sentense);
 		resultPanel.add(resultRoute);
@@ -229,7 +228,9 @@ public class Sample001 extends JFrame implements ActionListener{
 		CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
 		ReturnValues value = distance.start();
 		System.out.println(value.resultdistance);
+		System.out.println(String.format("%.2f", value.resultdistance));
 		System.out.println(value.resultRoute);
+
 
 
 		//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
@@ -314,8 +315,15 @@ public class Sample001 extends JFrame implements ActionListener{
 
 
 		System.out.println(list_root);
+		String point0 = list_root.get(0);
+		String point1 = list_root.get(1);
+		String point2 = list_root.get(2);
+		String point3 = list_root.get(3);
+		String point4 = list_root.get(4);
 
-
+		//String dist = String.valueOf(value.resultdistance);
+		resultRoute.setText(point0 + "→" + point1 + "→" + point2 + "→" + point3 + "→" + point4 + "→" + point0);
+		resultDistance.setText(String.format("%.2f", value.resultdistance));
 
 	}
 }
