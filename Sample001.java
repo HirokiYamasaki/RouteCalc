@@ -50,13 +50,14 @@ public class Sample001 extends JFrame implements ActionListener{
 	public int selected_num;
 	public String selected_X;
 	public String selected_Y;
+	//public static int errorFlag = 0;
 
 	public static void main(String[] args) {
 		Sample001 frame = new Sample001();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(10, 10, 600, 400);
-		frame.setTitle("タイトル");
+		frame.setTitle("5地点間最短ルート計算プログラム");
 		frame.setVisible(true);
 	}
 
@@ -71,6 +72,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		radio[2] = new JRadioButton();
 		radio[3] = new JRadioButton();
 		radio[4] = new JRadioButton();
+		radio[0].setSelected(true);
 
 		group.add(radio[0]);
 		group.add(radio[1]);
@@ -84,6 +86,22 @@ public class Sample001 extends JFrame implements ActionListener{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
+		///////////////////////////
+		JPanel distributionPanel = new JPanel();
+		//distributionPanel.setLayout(distributionPanel, BoxLayout.PAGE_AXIS));
+
+		JLabel distribution1 = new JLabel();
+		JLabel distribution2 = new JLabel();
+		JLabel distribution3 = new JLabel();
+
+
+		distribution1.setText("xy平面上にある座標を5つを回る最短ルートを出力します");
+		distribution2.setText("注: 出発点にする座標のラジオボタンをチェックしてください");
+		distribution3.setText("入力は-500～500までの整数です");
+		distributionPanel.add(distribution1);
+		distributionPanel.add(distribution2);
+		distributionPanel.add(distribution3);
+		////////////////////////////
 		JLabel emptylbl = new JLabel("");
 		JLabel lblX = new JLabel("X");
 		JLabel lblY = new JLabel("Y");
@@ -164,7 +182,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		panel_E.add(textArr[4][0]);
 		panel_E.add(textArr[4][1]);
 
-
+		mainPanel.add(distributionPanel);
 		mainPanel.add(panelXY);
 		mainPanel.add(panel_A);
 		mainPanel.add(panel_B);
@@ -226,105 +244,118 @@ public class Sample001 extends JFrame implements ActionListener{
 				cnt++;
 			}
 		}
-		System.out.println(selected_num);
-		CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
-		ReturnValues value = distance.start();
-		//System.out.println(value.resultdistance);
-		//System.out.println(value.resultRoute);
+		//System.out.println(selected_num);
+		//入力された値をcheckError.javaへ渡す
+		checkError error = new checkError();
+		String X = error.filter(selected_X, selected_Y, unselected);
+		System.out.println(X + " XXX");
+		if (X == "true") {
+			//正常な値が入力されていたらCalcDistanceで最短ルートを算出
+			CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
+			ReturnValues value = distance.start();
+			System.out.println(value.resultdistance);
+			System.out.println(value.resultRoute);
 
 
 
-		//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
-		//以下の処理かなり汚い。解決策求む
-		List<String> list_root = new ArrayList<>();
-		if (selected_num == 0) {
-			list_root.add("A");
-			for (int i=0; i < value.resultRoute.length() ;i++) {
-				System.out.println(value.resultRoute.substring(i,i+1));
-				if (value.resultRoute.substring(i,i+1).equals("0")) {
-					list_root.add("B");
-				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-					list_root.add("C");
-				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-					list_root.add("D");
-				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-					list_root.add("E");
+
+			//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
+			//以下の処理かなり汚い。解決策求む
+			List<String> list_root = new ArrayList<>();
+			if (selected_num == 0) {
+				list_root.add("A");
+				for (int i=0; i < value.resultRoute.length() ;i++) {
+					System.out.println(value.resultRoute.substring(i,i+1));
+					if (value.resultRoute.substring(i,i+1).equals("0")) {
+						list_root.add("B");
+					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+						list_root.add("C");
+					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+						list_root.add("D");
+					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+						list_root.add("E");
+					}
 				}
-			}
-			list_root.add("A");
-		} else if (selected_num == 1) {
-			list_root.add("B");
-			for (int i=0; i < value.resultRoute.length() ;i++) {
-				System.out.println(value.resultRoute.substring(i,i+1));
-				if (value.resultRoute.substring(i,i+1).equals("0")) {
-					list_root.add("A");
-				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-					list_root.add("C");
-				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-					list_root.add("D");
-				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-					list_root.add("E");
+				list_root.add("A");
+			} else if (selected_num == 1) {
+				list_root.add("B");
+				for (int i=0; i < value.resultRoute.length() ;i++) {
+					System.out.println(value.resultRoute.substring(i,i+1));
+					if (value.resultRoute.substring(i,i+1).equals("0")) {
+						list_root.add("A");
+					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+						list_root.add("C");
+					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+						list_root.add("D");
+					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+						list_root.add("E");
+					}
 				}
-			}
-			list_root.add("B");
-		} else if (selected_num == 2) {
-			list_root.add("C");
-			for (int i=0; i < value.resultRoute.length() ;i++) {
-				System.out.println(value.resultRoute.substring(i,i+1));
-				if (value.resultRoute.substring(i,i+1).equals("0")) {
-					list_root.add("A");
-				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-					list_root.add("B");
-				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-					list_root.add("D");
-				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-					list_root.add("E");
+				list_root.add("B");
+			} else if (selected_num == 2) {
+				list_root.add("C");
+				for (int i=0; i < value.resultRoute.length() ;i++) {
+					System.out.println(value.resultRoute.substring(i,i+1));
+					if (value.resultRoute.substring(i,i+1).equals("0")) {
+						list_root.add("A");
+					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+						list_root.add("B");
+					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+						list_root.add("D");
+					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+						list_root.add("E");
+					}
 				}
-			}
-			list_root.add("C");
-		} else if (selected_num == 3) {
-			list_root.add("D");
-			for (int i=0; i < value.resultRoute.length() ;i++) {
-				System.out.println(value.resultRoute.substring(i,i+1));
-				if (value.resultRoute.substring(i,i+1).equals("0")) {
-					list_root.add("A");
-				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-					list_root.add("B");
-				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-					list_root.add("C");
-				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-					list_root.add("E");
+				list_root.add("C");
+			} else if (selected_num == 3) {
+				list_root.add("D");
+				for (int i=0; i < value.resultRoute.length() ;i++) {
+					System.out.println(value.resultRoute.substring(i,i+1));
+					if (value.resultRoute.substring(i,i+1).equals("0")) {
+						list_root.add("A");
+					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+						list_root.add("B");
+					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+						list_root.add("C");
+					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+						list_root.add("E");
+					}
 				}
-			}
-			list_root.add("D");
-		} else if (selected_num == 4) {
-			list_root.add("E");
-			for (int i=0; i < value.resultRoute.length() ;i++) {
-				System.out.println(value.resultRoute.substring(i,i+1));
-				if (value.resultRoute.substring(i,i+1).equals("0")) {
-					list_root.add("A");
-				} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-					list_root.add("B");
-				} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-					list_root.add("C");
-				} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-					list_root.add("D");
+				list_root.add("D");
+			} else if (selected_num == 4) {
+				list_root.add("E");
+				for (int i=0; i < value.resultRoute.length() ;i++) {
+					System.out.println(value.resultRoute.substring(i,i+1));
+					if (value.resultRoute.substring(i,i+1).equals("0")) {
+						list_root.add("A");
+					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
+						list_root.add("B");
+					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
+						list_root.add("C");
+					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
+						list_root.add("D");
+					}
 				}
+				list_root.add("E");
 			}
-			list_root.add("E");
+
+			//画面出力
+			System.out.println(list_root);
+			String point0 = list_root.get(0);
+			String point1 = list_root.get(1);
+			String point2 = list_root.get(2);
+			String point3 = list_root.get(3);
+			String point4 = list_root.get(4);
+
+			resultRoute.setText(point0 + "→" + point1 + "→" + point2 + "→" + point3 + "→" + point4 + "→" + point0);
+			resultDistance.setText(String.format("%.2f", value.resultdistance));
+
+		} else {
+			resultRoute.setText("正しい値を入力してください");
+			resultDistance.setText("○○");
 		}
-
-
-		System.out.println(list_root);
-		String point0 = list_root.get(0);
-		String point1 = list_root.get(1);
-		String point2 = list_root.get(2);
-		String point3 = list_root.get(3);
-		String point4 = list_root.get(4);
-
-		resultRoute.setText(point0 + "→" + point1 + "→" + point2 + "→" + point3 + "→" + point4 + "→" + point0);
-		resultDistance.setText(String.format("%.2f", value.resultdistance));
-
 	}
+
+
 }
 
