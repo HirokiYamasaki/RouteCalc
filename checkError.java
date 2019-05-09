@@ -25,7 +25,7 @@ public class checkError {
 
 		for (int i=0; i<listNum.size(); i++) {
 			if (listBool.get(i) == true) {
-				int intNum = Integer.parseInt(listNum.get(i));
+				double intNum = Double.parseDouble(listNum.get(i));
 				boolean overNum = overNumber(intNum);
 				if (overNum == false) {
 					listBool.set(i, false);
@@ -50,7 +50,7 @@ public class checkError {
 	//数値に変換できないものがあればfalseを返す
 	public boolean isNumber(String val) {
 		try {
-			Integer.parseInt(val);
+			Double.parseDouble(val);
 			return true;
 		} catch (NumberFormatException nfex) {
 			return false;
@@ -58,7 +58,7 @@ public class checkError {
 	}
 
 	//-500 <= X <= 500に収まっているか
-	public boolean overNumber(int val) {
+	public boolean overNumber(double val) {
 		if (-500 <= val && val <= 500) {
 			return true;
 		} else {
