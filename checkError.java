@@ -6,7 +6,7 @@ public class checkError {
 	//正しい入力であれば"true" そうでないなら"false"を返すメソッド
 	public String filter(String selected_X, String selected_Y, String[][] unselected) {
 		List<String> listNum = new ArrayList<>();
-		List<Boolean> listBool = new ArrayList<>();
+		List<String> listBool = new ArrayList<>();
 
 		listNum.add(selected_X);
 		listNum.add(selected_Y);
@@ -19,16 +19,16 @@ public class checkError {
 		//
 		for (int i=0 ;i<listNum.size(); i++) {
 			//System.out.println(listNum.get(i) + "listNum");
-			boolean isNum = isNumber(listNum.get(i));
+			String isNum = isNumber(listNum.get(i));
 			listBool.add(isNum);
 		}
 
 		for (int i=0; i<listNum.size(); i++) {
-			if (listBool.get(i) == true) {
+			if (listBool.get(i) != "notNum") {
 				double intNum = Double.parseDouble(listNum.get(i));
 				boolean overNum = overNumber(intNum);
 				if (overNum == false) {
-					listBool.set(i, false);
+					listBool.set(i, "overNum");
 				}
 			}
 		}
@@ -39,21 +39,23 @@ public class checkError {
 		}
 		*/
 
-		if (listBool.contains(false)) {
-			return "false";
+		if (listBool.contains("notNum")) {
+			return "1";
+		} else if (listBool.contains("overNum")) {
+			return "2";
 		} else {
-			return "true";
+			return "0";
 		}
 	}
 
 
 	//数値に変換できないものがあればfalseを返す
-	public boolean isNumber(String val) {
+	public String isNumber(String val) {
 		try {
 			Double.parseDouble(val);
-			return true;
+			return "0";
 		} catch (NumberFormatException nfex) {
-			return false;
+			return "notNum";
 		}
 	}
 

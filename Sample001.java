@@ -249,7 +249,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		checkError error = new checkError();
 		String X = error.filter(selected_X, selected_Y, unselected);
 		System.out.println(X + " XXX");
-		if (X == "true") {
+		if (X == "0") {
 
 
 			//正常な値が入力されていたらCalcDistanceで最短ルートを算出
@@ -352,8 +352,11 @@ public class Sample001 extends JFrame implements ActionListener{
 			resultRoute.setText(point0 + "→" + point1 + "→" + point2 + "→" + point3 + "→" + point4 + "→" + point0);
 			resultDistance.setText(String.format("%.2f", value.resultdistance));
 
-		} else {
-			resultRoute.setText("正しい値を入力してください");
+		} else if (X == "1") {
+			resultRoute.setText("数値を入力してください");
+			resultDistance.setText("○○");
+		} else if (X == "2") {
+			resultRoute.setText("-500～500までの値を入力してください");
 			resultDistance.setText("○○");
 		}
 	}
