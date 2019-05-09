@@ -97,7 +97,7 @@ public class Sample001 extends JFrame implements ActionListener{
 
 		distribution1.setText("xy平面上にある座標を5つを回る最短ルートを出力します");
 		distribution2.setText("注: 出発点にする座標のラジオボタンをチェックしてください");
-		distribution3.setText("入力は-500～500までの整数です");
+		distribution3.setText("入力は-500～500までの数値です");
 		distributionPanel.add(distribution1);
 		distributionPanel.add(distribution2);
 		distributionPanel.add(distribution3);
