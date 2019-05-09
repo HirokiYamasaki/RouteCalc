@@ -22,7 +22,7 @@ public class CalcDistance {
 
 	//画面から入力された値をint型へ変換する
 	CalcDistance(String selected_X, String selected_Y, String[][] unselected) {
-	    resultDis = 1000000000;
+		resultDis = 1000000000;
 		this.selected_X = Double.parseDouble(selected_X);
 		this.selected_Y = Double.parseDouble(selected_Y);
 
@@ -33,16 +33,17 @@ public class CalcDistance {
 			list_Y.add(transInt2);
 		}
 
-		//System.out.println(selected_X + " " + selected_Y);
+		//System.out.println(selected_X + " " + selected_Y + " selected");
+
 
 		permutation("0123", "");
 	}
 
 	public ReturnValues start() {
-		List<Double> listX = new ArrayList<>();
-		List<Double> listY = new ArrayList<>();
 		ReturnValues value = new ReturnValues();
 		for (int i=0; i < list_perm.size() ;i++) {
+			List<Double> listX = new ArrayList<>();
+			List<Double> listY = new ArrayList<>();
 			//System.out.println(list_perm.get(i));
 			Z0 = list_perm.get(i);
 			Z1 = Integer.parseInt(Z0.substring(0,1));
@@ -66,6 +67,9 @@ public class CalcDistance {
 			listY.add(list_Y.get(Z4));
 			listY.add(selected_Y);
 
+			for (int k=0;k<listX.size();k++) {
+				System.out.println(listX.get(k) + " " + listY.get(k) + " listXY");
+			}
 			info(listX.size(), listX, listY);
 		}
 
@@ -117,8 +121,10 @@ public class CalcDistance {
 
 	//経路の表示
 	static void info(int n, List<Double> listX, List<Double> listY) {
-		if (resultDis > distanceRoute(n, listX, listY)) {
-			resultDis = distanceRoute(n, listX, listY);
+		double XXX = distanceRoute(n, listX, listY);
+		System.out.println(XXX + " sum");
+		if (resultDis > XXX) {
+			resultDis = XXX;
 			resultRoute = Z0;
 		}
 

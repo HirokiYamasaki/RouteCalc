@@ -250,6 +250,8 @@ public class Sample001 extends JFrame implements ActionListener{
 		String X = error.filter(selected_X, selected_Y, unselected);
 		System.out.println(X + " XXX");
 		if (X == "true") {
+
+
 			//正常な値が入力されていたらCalcDistanceで最短ルートを算出
 			CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
 			ReturnValues value = distance.start();
