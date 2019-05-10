@@ -50,7 +50,6 @@ public class Sample001 extends JFrame implements ActionListener{
 	public int selected_num;
 	public String selected_X;
 	public String selected_Y;
-	//public static int errorFlag = 0;
 
 	public static void main(String[] args) {
 		Sample001 frame = new Sample001();
@@ -86,9 +85,8 @@ public class Sample001 extends JFrame implements ActionListener{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		///////////////////////////
+
 		JPanel distributionPanel = new JPanel();
-		//distributionPanel.setLayout(distributionPanel, BoxLayout.PAGE_AXIS));
 
 		JLabel distribution1 = new JLabel();
 		JLabel distribution2 = new JLabel();
@@ -101,7 +99,8 @@ public class Sample001 extends JFrame implements ActionListener{
 		distributionPanel.add(distribution1);
 		distributionPanel.add(distribution2);
 		distributionPanel.add(distribution3);
-		////////////////////////////
+
+
 		JLabel emptylbl = new JLabel("");
 		JLabel lblX = new JLabel("X");
 		JLabel lblY = new JLabel("Y");
@@ -244,7 +243,7 @@ public class Sample001 extends JFrame implements ActionListener{
 				cnt++;
 			}
 		}
-		//System.out.println(selected_num);
+
 		//入力された値をcheckError.javaへ渡す
 		checkError error = new checkError();
 		String X = error.filter(selected_X, selected_Y, unselected);

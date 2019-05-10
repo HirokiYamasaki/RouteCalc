@@ -3,7 +3,7 @@ import java.util.List;
 
 public class checkError {
 
-	//正しい入力であれば"true" そうでないなら"false"を返すメソッド
+	//正しい入力であれば"0" 数値じゃない入力は"1" -500以下500以上なら"2" を返す
 	public String filter(String selected_X, String selected_Y, String[][] unselected) {
 		List<String> listNum = new ArrayList<>();
 		List<String> listBool = new ArrayList<>();
@@ -18,7 +18,6 @@ public class checkError {
 
 		//
 		for (int i=0 ;i<listNum.size(); i++) {
-			//System.out.println(listNum.get(i) + "listNum");
 			String isNum = isNumber(listNum.get(i));
 			listBool.add(isNum);
 		}
@@ -33,11 +32,6 @@ public class checkError {
 			}
 		}
 
-		/*
-		for (int i=0 ;i<listNum.size(); i++) {
-			System.out.println(listBool.get(i) + " " + listNum.get(i) + " listBool listNum");
-		}
-		*/
 
 		if (listBool.contains("notNum")) {
 			return "1";
