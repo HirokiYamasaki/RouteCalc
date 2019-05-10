@@ -16,12 +16,13 @@ public class checkError {
 			}
 		}
 
-		//
+		//数値確認
 		for (int i=0 ;i<listNum.size(); i++) {
 			String isNum = isNumber(listNum.get(i));
 			listBool.add(isNum);
 		}
 
+		//規定値範囲確認
 		for (int i=0; i<listNum.size(); i++) {
 			if (listBool.get(i) != "notNum") {
 				double intNum = Double.parseDouble(listNum.get(i));
