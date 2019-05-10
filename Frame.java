@@ -28,7 +28,7 @@ class ReturnValues {
 	double resultdistance;
 	String resultRoute;
 }
-public class Sample001 extends JFrame implements ActionListener{
+public class Frame extends JFrame implements ActionListener{
 
 	JTextField A_textX;
 	JTextField A_textY;
@@ -52,7 +52,7 @@ public class Sample001 extends JFrame implements ActionListener{
 	public String selected_Y;
 
 	public static void main(String[] args) {
-		Sample001 frame = new Sample001();
+		Frame frame = new Frame();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(10, 10, 600, 400);
@@ -60,7 +60,7 @@ public class Sample001 extends JFrame implements ActionListener{
 		frame.setVisible(true);
 	}
 
-	Sample001() {
+	Frame() {
 
 		//ラジオボタン5つ作成
 		ButtonGroup group = new ButtonGroup();
