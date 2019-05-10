@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CalcDistance {
 	static String Z0;
+	static String points;
 	private int Z1;
 	private int Z2;
 	private int Z3;
@@ -43,51 +44,46 @@ public class CalcDistance {
 	public ReturnValues start() {
 		ReturnValues value = new ReturnValues();
 		for (int i=0; i < list_perm.size() ;i++) {
-			List<Double> listX = new ArrayList<>();
-			List<Double> listY = new ArrayList<>();
+			List<Double> xPoints = new ArrayList<>();
+			List<Double> yPoints = new ArrayList<>();
 
-			Z0 = list_perm.get(i);
-			Z1 = Integer.parseInt(Z0.substring(0,1));
-			Z2 = Integer.parseInt(Z0.substring(1,2));
-			Z3 = Integer.parseInt(Z0.substring(2,3));
-			Z4 = Integer.parseInt(Z0.substring(3,4));
+			points = list_perm.get(i);
+			int point1 = Integer.parseInt(points.substring(0,1));
+			int point2 = Integer.parseInt(points.substring(1,2));
+			int point3 = Integer.parseInt(points.substring(2,3));
+			int point4 = Integer.parseInt(points.substring(3,4));
 
-			System.out.println(Z1 + " "+ Z2 + " "+ Z3 + " "+Z4 + " 順列");
+			System.out.println(point1 + " "+ point2 + " "+ point3 + " "+point4 + " 順列");
 
-			listX.add(selected_X);
-			listX.add(list_X.get(Z1));
-			listX.add(list_X.get(Z2));
-			listX.add(list_X.get(Z3));
-			listX.add(list_X.get(Z4));
-			listX.add(selected_X);
+			xPoints.add(selected_X);
+			xPoints.add(list_X.get(point1));
+			xPoints.add(list_X.get(point2));
+			xPoints.add(list_X.get(point3));
+			xPoints.add(list_X.get(point4));
+			xPoints.add(selected_X);
 
-			listY.add(selected_Y);
-			listY.add(list_Y.get(Z1));
-			listY.add(list_Y.get(Z2));
-			listY.add(list_Y.get(Z3));
-			listY.add(list_Y.get(Z4));
-			listY.add(selected_Y);
+			yPoints.add(selected_Y);
+			yPoints.add(list_Y.get(point1));
+			yPoints.add(list_Y.get(point2));
+			yPoints.add(list_Y.get(point3));
+			yPoints.add(list_Y.get(point4));
+			yPoints.add(selected_Y);
 
 			//小数点第二位までを有効な数字とする（第三位以下を切り捨て）
-			for (int j=0; j<listX.size() ;j++) {
-				BigDecimal bdNumX = roundDown(listX.get(j));
+			for (int j=0; j < xPoints.size() ;j++) {
+				BigDecimal bdNumX = roundDown(xPoints.get(j));
 				double doubleNumX = bdNumX.doubleValue();
-				listX.set(j, doubleNumX);
+				xPoints.set(j, doubleNumX);
 			}
 
-			for (int j=0; j<listY.size() ;j++) {
-				BigDecimal bdNumY = roundDown(listY.get(j));
+			for (int j=0; j < yPoints.size() ;j++) {
+				BigDecimal bdNumY = roundDown(yPoints.get(j));
 				double doubleNumY = bdNumY.doubleValue();
-				listY.set(j, doubleNumY);
+				yPoints.set(j, doubleNumY);
 			}
 
-			/*
-			for (int k=0 ;k<listX.size(); k++) {
-				System.out.println(listX.get(k) + " " + listY.get(k) + " BigDecimal");
-			}
-			*/
 
-			info(listX.size(), listX, listY);
+			info(yPoints.size(), xPoints, yPoints);
 		}
 
 		//最短経路の距離とルートを戻す
@@ -142,11 +138,11 @@ public class CalcDistance {
 
 	//経路の表示
 	static void info(int n, List<Double> listX, List<Double> listY) {
-		double XXX = distanceRoute(n, listX, listY);
-		System.out.println(XXX + " sum");
-		if (resultDis > XXX) {
-			resultDis = XXX;
-			resultRoute = Z0;
+		double distX = distanceRoute(n, listX, listY);
+		System.out.println(distX + " sum");
+		if (resultDis > distX) {
+			resultDis = distX;
+			resultRoute = points;
 		}
 
 	}
