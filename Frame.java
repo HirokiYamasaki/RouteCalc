@@ -247,7 +247,7 @@ public class Frame extends JFrame implements ActionListener{
 		//入力された値をcheckError.javaへ渡す
 		checkError error = new checkError();
 		String flag = error.filter(selected_X, selected_Y, unselected);
-		//System.out.println(X + " XXX");
+
 		if (flag == "0") {
 
 

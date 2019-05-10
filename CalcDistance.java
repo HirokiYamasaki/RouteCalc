@@ -4,12 +4,7 @@ import java.util.List;
 
 
 public class CalcDistance {
-	static String Z0;
 	static String points;
-	private int Z1;
-	private int Z2;
-	private int Z3;
-	private int Z4;
 	private double selected_X;
 	private double selected_Y;
 	private double transInt1;
@@ -139,7 +134,7 @@ public class CalcDistance {
 	//経路の表示
 	static void info(int n, List<Double> listX, List<Double> listY) {
 		double distX = distanceRoute(n, listX, listY);
-		System.out.println(distX + " sum");
+		//System.out.println(distX + " sum");
 		if (resultDis > distX) {
 			resultDis = distX;
 			resultRoute = points;
