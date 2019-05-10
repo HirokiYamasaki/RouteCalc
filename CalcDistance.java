@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,11 @@ public class CalcDistance {
 	List<Double> list_Y = new ArrayList<>();
 	List<String> list_perm = new ArrayList<>();
 
+	List<BigDecimal> list_bdNum_X = new ArrayList<>();
+	List<BigDecimal> list_bdNum_Y = new ArrayList<>();
 
-	//画面から入力された値をint型へ変換する
+
+	//画面から入力された値をdouble型へ変換する
 	CalcDistance(String selected_X, String selected_Y, String[][] unselected) {
 		resultDis = 1000000000;
 		this.selected_X = Double.parseDouble(selected_X);
@@ -33,9 +37,6 @@ public class CalcDistance {
 			list_Y.add(transInt2);
 		}
 
-		//System.out.println(selected_X + " " + selected_Y + " selected");
-
-
 		permutation("0123", "");
 	}
 
@@ -44,7 +45,7 @@ public class CalcDistance {
 		for (int i=0; i < list_perm.size() ;i++) {
 			List<Double> listX = new ArrayList<>();
 			List<Double> listY = new ArrayList<>();
-			//System.out.println(list_perm.get(i));
+
 			Z0 = list_perm.get(i);
 			Z1 = Integer.parseInt(Z0.substring(0,1));
 			Z2 = Integer.parseInt(Z0.substring(1,2));
@@ -67,9 +68,25 @@ public class CalcDistance {
 			listY.add(list_Y.get(Z4));
 			listY.add(selected_Y);
 
-			for (int k=0;k<listX.size();k++) {
-				System.out.println(listX.get(k) + " " + listY.get(k) + " listXY");
+			//小数点第二位までを有効な数字とする（第三位以下を切り捨て）
+			for (int j=0; j<listX.size() ;j++) {
+				BigDecimal bdNumX = roundDown(listX.get(j));
+				double doubleNumX = bdNumX.doubleValue();
+				listX.set(j, doubleNumX);
 			}
+
+			for (int j=0; j<listY.size() ;j++) {
+				BigDecimal bdNumY = roundDown(listY.get(j));
+				double doubleNumY = bdNumY.doubleValue();
+				listY.set(j, doubleNumY);
+			}
+
+			/*
+			for (int k=0 ;k<listX.size(); k++) {
+				System.out.println(listX.get(k) + " " + listY.get(k) + " BigDecimal");
+			}
+			*/
+
 			info(listX.size(), listX, listY);
 		}
 
@@ -97,12 +114,16 @@ public class CalcDistance {
     }
 
 
-	//2地点間の距離を出す
-	/*
-	static double distancePoint(Point p, Point q) {
-		return p.distance(q);
+	//小数点第二位まで切り捨て
+	public BigDecimal roundDown(double val) {
+		double S = val;
+		BigDecimal bd = new BigDecimal(S);
+		BigDecimal bd4 = bd.setScale(2, BigDecimal.ROUND_DOWN);  //小数第２位
+		return bd4;
 	}
-	*/
+
+
+	//2地点間の距離を計算
 	static double distancePoint(double x1, double y1, double x2, double y2) {
 		double distance = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 
