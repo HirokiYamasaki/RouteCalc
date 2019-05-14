@@ -6,8 +6,10 @@ public class checkError {
 	//正しい入力であれば"0" 数値じゃない入力は"1" -500以下500以上なら"2" を返す
 	public String filter(String selected_X, String selected_Y, String[][] unselected) {
 
-
+		//入力された値を保持
 		List<String> listNum = new ArrayList<>();
+
+		//正常な値であれば"0" 異常な値はエラー文字列を保持
 		List<String> listBool = new ArrayList<>();
 
 		listNum.add(selected_X);
