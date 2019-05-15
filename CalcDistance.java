@@ -1,3 +1,12 @@
+/*
+ * 五地点間の最短経路とその時の距離を計算するクラス
+ *
+ * Frame.javaで入力された値を受け取り、全ての経路とその時の距離を求め
+ * 最短ルートとその時の距離をFrame.javaへ返す
+ *
+ */
+
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
