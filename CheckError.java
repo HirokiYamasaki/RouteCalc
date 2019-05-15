@@ -60,7 +60,7 @@ public class CheckError {
 			}
 		}
 
-
+		//Frame.javaへ返す
 		if (listBool.contains("notNum")) {
 			return "1";
 		} else if (listBool.contains("overNum")) {
