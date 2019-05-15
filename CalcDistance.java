@@ -4,6 +4,23 @@
  * Frame.javaで入力された値を受け取り、全ての経路とその時の距離を求め
  * 最短ルートとその時の距離をFrame.javaへ返す
  *
+ *
+ * startメソッドが呼び出される
+ * ↓
+ * 0,1,2,3から成る順列を生成
+ * ↓
+ * xPoints, yPointsに各x,y座標格納
+ * ↓
+ * xPoints, yPointsの各値を小数点第三位で切り捨て
+ * ↓
+ * infoメソッドに各x,y座標をを入力
+ * ↓
+ * distanceRouteメソッドで最初に生成された順列の順に距離を計算(distancePointで計算した値を足し算)
+ * 																	↓
+ * 																二地点間の距離を計算するメソッド
+ * ↓
+ * 一番距離が短かった時の距離と、その時の順列(ルート)を返す
+ *
  */
 
 
@@ -49,6 +66,8 @@ public class CalcDistance {
 	public ReturnValues start() {
 		ReturnValues value = new ReturnValues();
 		for (int i=0; i < list_perm.size() ;i++) {
+
+
 			List<Double> xPoints = new ArrayList<>();
 			List<Double> yPoints = new ArrayList<>();
 
@@ -142,9 +161,11 @@ public class CalcDistance {
 	}
 
 	//経路の表示
+	//各経路のx座標、y座標とリストのサイズnを引数
 	static void info(int n, List<Double> listX, List<Double> listY) {
+
+		//distXがresultDisより小さい値の時resutlDisを上書き
 		double distX = distanceRoute(n, listX, listY);
-		//System.out.println(distX + " sum");
 		if (resultDis > distX) {
 			resultDis = distX;
 			resultRoute = points;
