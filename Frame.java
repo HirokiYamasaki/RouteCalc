@@ -15,19 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- *
- */
-
-/**
- * @author h_yamasaki
- *
- */
 
 class ReturnValues {
 	double resultdistance;
 	String resultRoute;
 }
+
 public class Frame extends JFrame implements ActionListener{
 
 	JTextField A_textX;
@@ -340,7 +333,7 @@ public class Frame extends JFrame implements ActionListener{
 				list_root.add("E");
 			}
 
-			//画面出力
+			//小数点第二位まで切り捨てて画面出力
 			System.out.println(list_root);
 			String point0 = list_root.get(0);
 			String point1 = list_root.get(1);
