@@ -23,6 +23,7 @@ class ReturnValues {
 
 public class Frame extends JFrame implements ActionListener{
 
+	//各inputを格納する変数
 	JTextField A_textX;
 	JTextField A_textY;
 	JTextField B_textX;
@@ -36,6 +37,8 @@ public class Frame extends JFrame implements ActionListener{
 
 	JRadioButton[] radio;
 	JTextField[][] textArr;
+
+	//結果出力ラベル
 	JLabel resultRoute;
 	JLabel resultDistance;
 
@@ -174,6 +177,8 @@ public class Frame extends JFrame implements ActionListener{
 		panel_E.add(textArr[4][0]);
 		panel_E.add(textArr[4][1]);
 
+
+
 		mainPanel.add(distributionPanel);
 		mainPanel.add(panelXY);
 		mainPanel.add(panel_A);
@@ -211,9 +216,11 @@ public class Frame extends JFrame implements ActionListener{
 		distancePanel.add(sentenseDistance);
 		distancePanel.add(resultDistance);
 
+
 		outputPanel.add(calcPanel);
 		outputPanel.add(routePanel);
 		outputPanel.add(distancePanel);
+
 
 		mainPanel.add(outputPanel);
 
@@ -222,6 +229,7 @@ public class Frame extends JFrame implements ActionListener{
 
 
 	//計算ボタンがクリックされたとき
+	//
 	public void actionPerformed(ActionEvent e){
 		unselected = new String[4][2];
 		int cnt = 0;
@@ -241,16 +249,14 @@ public class Frame extends JFrame implements ActionListener{
 		CheckError error = new CheckError();
 		String flag = error.filter(selected_X, selected_Y, unselected);
 
+		//flag = "0":正常な値  "1":数値ではない値  "2":規定値超過
 		if (flag == "0") {
-
 
 			//正常な値が入力されていたらCalcDistanceで最短ルートを算出
 			CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
 			ReturnValues value = distance.start();
-			System.out.println(value.resultdistance);
-			System.out.println(value.resultRoute);
-
-
+			//System.out.println(value.resultdistance);
+			//System.out.println(value.resultRoute);
 
 
 			//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
