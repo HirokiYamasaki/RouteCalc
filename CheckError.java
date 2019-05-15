@@ -1,7 +1,18 @@
+/*
+ * エラー処理クラス
+ *
+ * Frame.javaからの入力を受け取り "0" or "1" or "2" をFrame.javaへ返す
+ * "0":正常な入力
+ * "1":数値ではない入力
+ * "2":-500～500 に範囲に収まっていない入力
+ *
+ */
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class checkError {
+public class CheckError {
 
 	//正しい入力であれば"0" 数値じゃない入力は"1" -500以下500以上なら"2" を返す
 	public String filter(String selected_X, String selected_Y, String[][] unselected) {
