@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,8 @@ public class CalcDistance {
 	static String points;
 	private double selected_X;
 	private double selected_Y;
-	private double transInt1;
-	private double transInt2;
+	private double transDouble1;
+	private double transDouble2;
 	static double resultDis;
 	static String resultRoute;
 
@@ -27,10 +28,10 @@ public class CalcDistance {
 		this.selected_Y = Double.parseDouble(selected_Y);
 
 		for (int i=0; i < unselected.length ;i++) {
-			transInt1 = Double.parseDouble(unselected[i][0]);
-			transInt2 = Double.parseDouble(unselected[i][1]);
-			list_X.add(transInt1);
-			list_Y.add(transInt2);
+			transDouble1 = Double.parseDouble(unselected[i][0]);
+			transDouble2 = Double.parseDouble(unselected[i][1]);
+			list_X.add(transDouble1);
+			list_Y.add(transDouble2);
 		}
 
 		permutation("0123", "");
@@ -105,12 +106,12 @@ public class CalcDistance {
     }
 
 
-	//小数点第二位まで切り捨て
+	//小数点第3位で切り捨てるメソッド
 	public BigDecimal roundDown(double val) {
 		double S = val;
 		BigDecimal bd = new BigDecimal(S);
-		BigDecimal bd4 = bd.setScale(2, BigDecimal.ROUND_DOWN);  //小数第２位
-		return bd4;
+		BigDecimal bdScale = bd.setScale(2, RoundingMode.FLOOR);
+		return bdScale;
 	}
 
 
