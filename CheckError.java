@@ -61,12 +61,10 @@ public class CheckError {
 		}
 
 		//Frame.javaへ返す
-		if (listBool.contains("notNum")) {
+		if (listBool.contains("notNum") || listBool.contains("contE")) {
 			return "1";
 		} else if (listBool.contains("overNum")) {
 			return "2";
-		} else if (listBool.contains("contE")) {
-			return "1";
 		} else {
 			return "0";
 		}
@@ -75,7 +73,7 @@ public class CheckError {
 
 	//数値に変換できないものがあればfalseを返す
 	//返り値  正常な値:"0" 異常な値:notNum
-	public String isNumber(String val) {
+	private String isNumber(String val) {
 		try {
 			Double.parseDouble(val);
 			return "0";
@@ -86,7 +84,7 @@ public class CheckError {
 
 	//e(指数表現が含まれているか)
 	//返り値 正常な値:"0" 異常な値:"containsE"
-	public String eNumber(String val) {
+	private String eNumber(String val) {
 		if (val.contains("e")) {
 			return "containsE";
 		} else {
@@ -97,7 +95,7 @@ public class CheckError {
 
 	//-500 <= X <= 500に収まっているか
 	//返り値 正常な値:"0" 異常な値:"overNum"
-	public String overNumber(double val) {
+	private String overNumber(double val) {
 		if (-500 <= val && val <= 500) {
 			return "0";
 		} else {
