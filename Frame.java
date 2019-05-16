@@ -258,8 +258,7 @@ public class Frame extends JFrame implements ActionListener{
 		}
 
 		//入力された値をcheckError.javaへ渡す
-		CheckError error = new CheckError();
-		String flag = error.filter(selected_X, selected_Y, unselected);
+		String flag = CheckError.filter(selected_X, selected_Y, unselected);
 
 		//flag = "0":正常な値  "1":数値ではない値  "2":規定値超過
 		if (flag == "0") {
@@ -351,7 +350,7 @@ public class Frame extends JFrame implements ActionListener{
 				list_root.add("E");
 			}
 
-			//小数点第二位まで切り捨てて画面出力
+			//小数点第3位を四捨五入 画面出力
 			System.out.println(list_root);
 			String point0 = list_root.get(0);
 			String point1 = list_root.get(1);

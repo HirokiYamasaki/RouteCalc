@@ -15,7 +15,7 @@ import java.util.List;
 public class CheckError {
 
 	//正しい入力であれば"0" 数値じゃない入力は"1" -500以下500以上なら"2" を返す
-	public String filter(String selected_X, String selected_Y, String[][] unselected) {
+	public static String filter(String selected_X, String selected_Y, String[][] unselected) {
 
 		//入力された値を保持
 		List<String> listNum = new ArrayList<>();
@@ -73,7 +73,7 @@ public class CheckError {
 
 	//数値に変換できないものがあればfalseを返す
 	//返り値  正常な値:"0" 異常な値:notNum
-	private String isNumber(String val) {
+	private static String isNumber(String val) {
 		try {
 			Double.parseDouble(val);
 			return "0";
@@ -84,7 +84,7 @@ public class CheckError {
 
 	//e(指数表現が含まれているか)
 	//返り値 正常な値:"0" 異常な値:"containsE"
-	private String eNumber(String val) {
+	private static String eNumber(String val) {
 		if (val.contains("e")) {
 			return "containsE";
 		} else {
@@ -95,7 +95,7 @@ public class CheckError {
 
 	//-500 <= X <= 500に収まっているか
 	//返り値 正常な値:"0" 異常な値:"overNum"
-	private String overNumber(double val) {
+	private static String overNumber(double val) {
 		if (-500 <= val && val <= 500) {
 			return "0";
 		} else {
