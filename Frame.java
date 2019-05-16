@@ -1,3 +1,11 @@
+/*
+ * 画面表示クラス
+ *
+ * 入力された値をCheckError.javaやCalcDistancd.javaへ渡す
+ *
+ */
+
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -36,6 +44,8 @@ public class Frame extends JFrame implements ActionListener{
 	JTextField E_textY;
 
 	JRadioButton[] radio;
+
+	//入力された値を一時的に保持する配列
 	JTextField[][] textArr;
 
 	//結果出力ラベル
@@ -81,21 +91,23 @@ public class Frame extends JFrame implements ActionListener{
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
+		///////////////
 
-		JPanel distributionPanel = new JPanel();
+		JPanel descriptionPanel = new JPanel();
 
-		JLabel distribution1 = new JLabel();
-		JLabel distribution2 = new JLabel();
-		JLabel distribution3 = new JLabel();
+		JLabel description1 = new JLabel();
+		JLabel description2 = new JLabel();
+		JLabel description3 = new JLabel();
 
 
-		distribution1.setText("xy平面上にある座標を5つを回る最短ルートを出力します");
-		distribution2.setText("注: 出発点にする座標のラジオボタンをチェックしてください");
-		distribution3.setText("入力は-500～500までの数値です");
-		distributionPanel.add(distribution1);
-		distributionPanel.add(distribution2);
-		distributionPanel.add(distribution3);
+		description1.setText("xy平面上にある座標を5つを回る最短ルートを出力します");
+		description2.setText("注: 出発点にする座標のラジオボタンをチェックしてください");
+		description3.setText("入力は-500～500までの数値です");
+		descriptionPanel.add(description1);
+		descriptionPanel.add(description2);
+		descriptionPanel.add(description3);
 
+		////////////////////
 
 		JLabel emptylbl = new JLabel("");
 		JLabel lblX = new JLabel("X");
@@ -179,7 +191,7 @@ public class Frame extends JFrame implements ActionListener{
 
 
 
-		mainPanel.add(distributionPanel);
+		mainPanel.add(descriptionPanel);
 		mainPanel.add(panelXY);
 		mainPanel.add(panel_A);
 		mainPanel.add(panel_B);
