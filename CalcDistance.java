@@ -136,10 +136,9 @@ public class CalcDistance {
 
 	//小数点第3位で切り捨てるメソッド
 	public BigDecimal roundDown(double val) {
-		double S = val;
-		BigDecimal bd = new BigDecimal(S);
-		BigDecimal bdScale = bd.setScale(2, RoundingMode.FLOOR);
-		return bdScale;
+		BigDecimal bdNum = new BigDecimal(val).setScale(2, RoundingMode.FLOOR);
+
+		return bdNum;
 	}
 
 
@@ -164,7 +163,7 @@ public class CalcDistance {
 	//各経路のx座標、y座標とリストのサイズnを引数
 	static void info(int n, List<Double> listX, List<Double> listY) {
 
-		//distXがresultDisより小さい値の時resutlDisを上書き
+		//distXがresultDisより小さい値の時resutlDisとresultRouteを上書き
 		double distX = distanceRoute(n, listX, listY);
 		if (resultDis > distX) {
 			resultDis = distX;
