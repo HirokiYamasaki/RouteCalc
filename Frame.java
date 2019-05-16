@@ -266,89 +266,19 @@ public class Frame extends JFrame implements ActionListener{
 			//正常な値が入力されていたらCalcDistanceで最短ルートを算出
 			CalcDistance distance = new CalcDistance(selected_X, selected_Y, unselected);
 			ReturnValues value = distance.start();
-			//System.out.println(value.resultdistance);
-			//System.out.println(value.resultRoute);
 
 
 			//resultRoute("0123"など)String型の文字列で戻ってきた経路のポイントをABCDEなどのアルファベットに直す。
-			//以下の処理かなり汚い。解決策求む
 			List<String> list_root = new ArrayList<>();
-			if (selected_num == 0) {
-				list_root.add("A");
+
+			list_root.add(String.valueOf(Character.forDigit(selected_num+10,16)).toUpperCase());
 				for (int i=0; i < value.resultRoute.length() ;i++) {
-					System.out.println(value.resultRoute.substring(i,i+1));
-					if (value.resultRoute.substring(i,i+1).equals("0")) {
-						list_root.add("B");
-					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-						list_root.add("C");
-					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-						list_root.add("D");
-					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-						list_root.add("E");
-					}
+					int temp = Integer.parseInt(value.resultRoute.substring(i,i+1));
+					if (Character.getNumericValue(list_root.get(0).charAt(0)) - 10 <= temp)temp++;
+					list_root.add(String.valueOf(Character.forDigit(temp+10,16)).toUpperCase());
 				}
-				list_root.add("A");
-			} else if (selected_num == 1) {
-				list_root.add("B");
-				for (int i=0; i < value.resultRoute.length() ;i++) {
-					System.out.println(value.resultRoute.substring(i,i+1));
-					if (value.resultRoute.substring(i,i+1).equals("0")) {
-						list_root.add("A");
-					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-						list_root.add("C");
-					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-						list_root.add("D");
-					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-						list_root.add("E");
-					}
-				}
-				list_root.add("B");
-			} else if (selected_num == 2) {
-				list_root.add("C");
-				for (int i=0; i < value.resultRoute.length() ;i++) {
-					System.out.println(value.resultRoute.substring(i,i+1));
-					if (value.resultRoute.substring(i,i+1).equals("0")) {
-						list_root.add("A");
-					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-						list_root.add("B");
-					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-						list_root.add("D");
-					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-						list_root.add("E");
-					}
-				}
-				list_root.add("C");
-			} else if (selected_num == 3) {
-				list_root.add("D");
-				for (int i=0; i < value.resultRoute.length() ;i++) {
-					System.out.println(value.resultRoute.substring(i,i+1));
-					if (value.resultRoute.substring(i,i+1).equals("0")) {
-						list_root.add("A");
-					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-						list_root.add("B");
-					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-						list_root.add("C");
-					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-						list_root.add("E");
-					}
-				}
-				list_root.add("D");
-			} else if (selected_num == 4) {
-				list_root.add("E");
-				for (int i=0; i < value.resultRoute.length() ;i++) {
-					System.out.println(value.resultRoute.substring(i,i+1));
-					if (value.resultRoute.substring(i,i+1).equals("0")) {
-						list_root.add("A");
-					} else if (value.resultRoute.substring(i,i+1).equals("1")) {
-						list_root.add("B");
-					} else if (value.resultRoute.substring(i,i+1).equals("2")) {
-						list_root.add("C");
-					} else if (value.resultRoute.substring(i,i+1).equals("3")) {
-						list_root.add("D");
-					}
-				}
-				list_root.add("E");
-			}
+			list_root.add(String.valueOf(Character.forDigit(selected_num+10,16)).toUpperCase());
+
 
 			//小数点第3位を四捨五入 画面出力
 			System.out.println(list_root);
