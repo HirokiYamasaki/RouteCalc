@@ -72,18 +72,13 @@ public class Frame extends JFrame implements ActionListener{
 		ButtonGroup group = new ButtonGroup();
 
 		radio = new JRadioButton[5];
-		radio[0] = new JRadioButton();
-		radio[1] = new JRadioButton();
-		radio[2] = new JRadioButton();
-		radio[3] = new JRadioButton();
-		radio[4] = new JRadioButton();
+		for (int i=0; i <= 4 ;i++) {
+			radio[i] = new JRadioButton();
+			group.add(radio[i]);
+		}
+
 		radio[0].setSelected(true);
 
-		group.add(radio[0]);
-		group.add(radio[1]);
-		group.add(radio[2]);
-		group.add(radio[3]);
-		group.add(radio[4]);
 
 		textArr = new JTextField[5][2];
 
