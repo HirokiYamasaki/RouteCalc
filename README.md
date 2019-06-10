@@ -24,4 +24,6 @@ Java(Swing)
 ![img1](image/fivePointsCalc1.PNG)
 
 
-  
+**結果**
+
+![img1](image/fivePointsCalc2.PNG)
