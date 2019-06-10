@@ -19,9 +19,9 @@ xy平面上にある出発地点の座標と4つの座標を入力とする。
 
 Java(Swing)
 
-初期画面
+**初期画面**
+
 ![img1](image/fivePointsCalc1.PNG)
 
-結果
-![img2](image/fivePointsCalc2.PNG)
+
   
